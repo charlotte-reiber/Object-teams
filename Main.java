@@ -11,14 +11,14 @@ class Main {
     Graphics g = panel.getGraphics();    
     Graphics2D graph = (Graphics2D)g;
 
-    CardFront s3 = new CardFront(graph, 1);
-    CardFront h5 = new CardFront(graph, 13 + 3);
-    CardFront d7 = new CardFront(graph, 26 + 5);
-    CardFront c10 = new CardFront(graph, 39 + 8);
-    CardFront sk = new CardFront(graph, 11);
-    CardFront hq = new CardFront(graph, 13 + 10);
-    CardFront dj = new CardFront(graph, 26 + 9);
-    CardFront ca = new CardFront(graph, 51);
+    CardFront s3 = new CardFront(graph, "♠", "3");
+    CardFront h5 = new CardFront(graph, "♥", "5");
+    CardFront d7 = new CardFront(graph, "♦", "7");
+    CardFront c10 = new CardFront(graph, "♣", "10");
+    CardFront sk = new CardFront(graph, "♠", "K");
+    CardFront hq = new CardFront(graph, "♥", "Q");
+    CardFront dj = new CardFront(graph, "♦", "J");
+    CardFront ca = new CardFront(graph, "♣", "A");
     
     s3.draw(25, 25);
     hq.draw(150, 25);

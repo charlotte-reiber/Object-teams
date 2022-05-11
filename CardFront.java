@@ -2,7 +2,6 @@ import java.awt.*;
 
 public class CardFront {
   private Graphics2D graph;
-  private int seed;
   private String v;
   private String s;
   private Suit suit;
@@ -10,40 +9,21 @@ public class CardFront {
   private CardBack back;
 
   private static final int SIZE = 12;
-  private static final int BASE = 9;
-  private static final String[] SPECIALS = {"J", "Q", "K", "A"};
-  private static final String[] SUITS = {"s", "h", "d", "c"};
   
-  public CardFront(Graphics2D g, int seed) {
+  public CardFront(Graphics2D g, String suit, String value) {
     this.graph = g;
-    this.seed = seed;
-    this.v = calcValue();
-    this.s = getSuit();
+    this.v = value;
+    this.s = suit;
     this.suit = new Suit(this.graph, this.s, SIZE * 3 / 2);
     this.special = new Special(this.graph, this.s, this.v, SIZE * 8);
     this.back = new CardBack(this.graph, SIZE * 25 / 2, SIZE * 15 / 2);
-  }
-
-  //calculates the number/special on the card
-  private String calcValue() {
-    int n = this.seed % (BASE + SPECIALS.length) + 2;
-    String c;
-    if (n > BASE + 1) c = SPECIALS[n - BASE - 2];
-    else c = Integer.toString(n);
-    return c;
-  }
-
-  //calculates the suit
-  private String getSuit() {
-    int s = this.seed / (BASE + SPECIALS.length);
-    return SUITS[s];
   }
 
   // this bit of code is important to the rendering process
   //draws the card
   public void draw(int x, int y) {
     drawBlank(x, y);
-    if ("s".equals(this.s)||"c".equals(this.s)) 
+    if ("♠".equals(this.s)||"♣".equals(this.s)) 
       this.graph.setColor(Color.BLACK);
     else this.graph.setColor(Color.RED);
     if (this.v.equals("2")) drawTwo(x, y);

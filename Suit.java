@@ -26,9 +26,9 @@ class Suit {
   public void draw(int x, int y) {
     x -= this.center;
     y -= this.middle;
-    if (suit.equals("s")) drawSpade(x, y);
-    else if (suit.equals("h")) drawHeart(x, y);
-    else if (suit.equals("d")) drawDiamond(x, y);
+    if (suit.equals("♠")) drawSpade(x, y);
+    else if (suit.equals("♥")) drawHeart(x, y);
+    else if (suit.equals("♦")) drawDiamond(x, y);
     else drawClub(x, y);
   }
 

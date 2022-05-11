@@ -20,12 +20,19 @@ class Special {
   }
 
   public void draw(int x, int y) {
-    if (this.v.equals("K")) drawKing(x, y);
-    else if (this.v.equals("Q")) drawQueen(x, y);
-    else if (this.v.equals("J")) drawJack(x, y);
-    else drawAce(x, y);
-    this.graph.setColor(Color.WHITE);
-    this.suit.draw(x, y);
+    if (this.v.equals("K")) {
+      drawKing(x, y);
+      this.graph.setColor(Color.WHITE);
+      this.suit.draw(x, y);
+    } else if (this.v.equals("Q")) {
+      drawQueen(x, y);
+      this.graph.setColor(Color.WHITE);
+      this.suit.draw(x, y);
+    } else if (this.v.equals("J")) {
+      drawJack(x, y);
+      this.graph.setColor(Color.WHITE);
+      this.suit.draw(x, y);
+    } else drawAce(x, y);
   }
 
   private void drawBody(int x, int y) {
