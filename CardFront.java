@@ -39,6 +39,7 @@ public class CardFront {
     return SUITS[s];
   }
 
+  // this bit of code is important to the rendering process
   //draws the card
   public void draw(int x, int y) {
     drawBlank(x, y);
@@ -59,6 +60,7 @@ public class CardFront {
     }
   }
 
+  // this bit of code is important to the rendering process
   //draws a blank card
   private void drawBlank(int x, int y) {
     this.graph.setColor(Color.WHITE);
@@ -78,6 +80,7 @@ public class CardFront {
     }
   }
 
+  // this bit of code is important to the rendering process
   private void drawTwo(int x, int y) {
     int middle = SIZE * 7 + y;
     int center = SIZE * 9 / 2 + x;
@@ -86,6 +89,7 @@ public class CardFront {
     this.suit.draw(center, middle + spacing);
   }
 
+  // this bit of code is important to the rendering process
   private void drawThree(int x, int y) {
     int middle = SIZE * 7 + y;
     int center = SIZE * 9 / 2 + x;
@@ -95,6 +99,7 @@ public class CardFront {
     this.suit.draw(center, middle + spacing);
   }
 
+  // this bit of code is important to the rendering process
   private void drawFour(int x, int y) {
     int middle = SIZE * 7 + y;
     int center = SIZE * 9 / 2 + x;
@@ -106,6 +111,7 @@ public class CardFront {
     this.suit.draw(center + spaceH, middle - spaceV);
   }
 
+  // this bit of code is important to the rendering process
   private void drawFive(int x, int y) {
     int middle = SIZE * 7 + y;
     int center = SIZE * 9 / 2 + x;
@@ -114,6 +120,7 @@ public class CardFront {
     
   }
 
+  // this bit of code is important to the rendering process
   private void drawSix(int x, int y) {
     int middle = SIZE * 7 + y;
     int center = SIZE * 9 / 2 + x;
@@ -127,6 +134,7 @@ public class CardFront {
     this.suit.draw(center - spaceH, middle + spaceV);
   }
 
+  // this bit of code is important to the rendering process
   private void drawSeven(int x, int y) {
     int middle = SIZE * 7 + y;
     int center = SIZE * 9 / 2 + x;
@@ -139,16 +147,19 @@ public class CardFront {
     drawThree(x, y);
   }
 
+  // this bit of code is important to the rendering process
   private void drawEight(int x, int y) {
     drawTwo(x, y);
     drawSix(x, y);
   }
 
+  // this bit of code is important to the rendering process
   private void drawNine(int x, int y) {
     drawSix(x, y);
     drawThree(x, y);
   }
 
+  // this bit of code is important to the rendering process
   private void drawTen(int x, int y) {
     int middle = SIZE * 7 + y;
     int center = SIZE * 9 / 2 + x;
@@ -161,6 +172,7 @@ public class CardFront {
     drawSix(x, y);
   }
 
+  // this bit of code is important to the rendering process
   public void drawBack(int x, int y) {
     drawBlank(x, y);
     this.back.draw(x + SIZE * 9 / 2, y + SIZE * 7);
