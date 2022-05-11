@@ -40,6 +40,7 @@ public class Deck {
     }
     this.deck = tempDeck;
     shuffle();
+    
   }
 
   //Shuffles the deck
