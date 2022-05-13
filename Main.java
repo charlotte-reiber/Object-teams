@@ -6,7 +6,7 @@ class Main {
     System.out.println("hello");
 
     DrawingPanel panel = new DrawingPanel(700, 500);
-    panel.setBackground(Color.BLUE);
+    panel.setBackground(new Color(50, 100, 80));
     
     Graphics g = panel.getGraphics();    
     Graphics2D graph = (Graphics2D)g;
