@@ -2083,7 +2083,7 @@ public final class DrawingPanel implements ImageObserver {
      */
     private void setupMenuBar() {
         // abort compare if we're running as an applet or in a secure environment
-        boolean secure = (System.getSecurityManager() != null);
+        boolean secure = (true);
         
         JMenuItem saveAs = new JMenuItem("Save As...", 'A');
         saveAs.addActionListener(actionListener);
