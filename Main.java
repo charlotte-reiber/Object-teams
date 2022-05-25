@@ -6,6 +6,6 @@ class Main {
     Deck deck = new Deck(52);
     Scanner scan = new Scanner(System.in);
     Player user = new Player("bob", scan);
-    user.askPlayer();
+    System.out.println(user.askPlayer());
   }
 }
