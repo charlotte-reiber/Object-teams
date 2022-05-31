@@ -2,11 +2,11 @@
 import java.util.Scanner;
 
 class Game {
-  Scanner scan;
-  Deck deck;
-  Player[] players;
-  Player active;
-  Player recipient;
+  private Scanner scan;
+  private Deck deck;
+  private Player[] players;
+  private Player active;
+  private Player recipient;
   
   public Game(Scanner scan, int numPlayers) {
     this.deck = new Deck(52);
