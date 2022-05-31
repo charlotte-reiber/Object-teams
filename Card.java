@@ -18,17 +18,20 @@ public class Card {
       cardValue = (value==0) ? 11 : ((value<10) ? value+1 : 10);
     }
   
-    // Returns the value of the card from 1-13
+    /**Returns the value of the card from 1-13
+    */
     public int getValue() {
       return this.value;
     }
   
-    //Returns the value of the card from 1-11
+    /**Returns the value of the card from 1-11
+    */
     public int getCardValue() {
       return this.cardValue;
     }
   
-    //Returns the face value of the card
+    /**Returns the face value of the card
+    */
     public String getFace() {
       return SUITES[this.suite]+this.cardFace;
     }
