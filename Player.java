@@ -7,7 +7,7 @@ class Player {
   private ArrayList<Card> hand = new ArrayList<Card>();
   private int numPairs = 0;
   
-  public Player(String name, Scanner scan) {
+  public Player(Scanner scan) {
     this.scan = scan;
     this.name = askName();
   }
@@ -24,6 +24,7 @@ class Player {
     player = player.toLowerCase();
     return player;
   }
+  
   /**
   * this is a method that removes a card
   * from the players hand and returns it
@@ -50,7 +51,7 @@ class Player {
   * to the player's hand
   * @param the card being added
   */
-  public void getCard(Card card) {
+  public void goFish(Card card) {
     this.hand.add(card);
   }
 
@@ -112,5 +113,67 @@ class Player {
     token.replaceAll("\\s", "_");
     token.toLowerCase();
     return token;
+  }
+
+  /**
+  * this is a method that checks 
+  * if the player has any matches
+  * @returns the number of pairs the player has
+  */
+  public int checkPairs() {
+    for (int i = 0; i < this.hand.size(); i++) {
+      for (int j = i; j < this.hand.size(); j++) {
+        int a = this.hand.get(i).getValue();
+        int b = this.hand.get(j).getValue();
+        if (a == b || i != j) {
+          this.numPairs++;
+          this.hand.remove(j);
+          this.hand.remove(i);
+          i--;
+          j = this.hand.size();
+        }
+      }
+    }
+    return numPairs;
+  }
+
+  /**
+  * this is a method that returns a string
+  * representing the player's hand
+  * @returns the player's hand
+  */
+  public String getHand() {
+    String hand = "";
+    for (Card card : this.hand) hand += card.toString() + "";
+    return hand;
+  }
+
+  /**
+  * this is a method that tells if the player has cards
+  * @returns if the player has cards
+  */
+  public boolean hasCards() {
+    return this.hand.size() > 0;
+  }
+
+  /**
+  * this is a method that returns the player's name
+  * @returns the player's name
+  */
+  public String getName() {
+    return this.name;
+  }
+
+  /**
+  * this is a method that tells if the player
+  * being passed in is the same as the player object
+  * @returns if the players are the same
+  * @param the player being checked against
+  */
+  public boolean equals(Player player) {
+    if (!checkName(player.name)) return false;
+    else if (!this.getHand().equals(player.getHand()))
+      return false;
+    return true;
   }
 }
