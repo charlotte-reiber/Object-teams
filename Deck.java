@@ -15,7 +15,7 @@ public class Deck {
   /**Draws the top card from the deck
   */
   public Card drawCard() {
-    //if (this.deck.length==0) return new Card(1, -1);
+    //if (this.deck.length==0) return new Card(-1);
     Card tempCard = this.deck.get(0);
     this.deck.remove(0);
     //this.deck = Arrays.copyOfRange(this.deck, 1, this.deck.length);
@@ -36,7 +36,7 @@ public class Deck {
     ArrayList<Card> tempDeck = new ArrayList<Card>();
     //Card[] tempDeck = new Card[deckSize];
     for(int i = 0; i<deckSize;i++) {
-      tempDeck.add(new Card(deckSize, i));
+      tempDeck.add(new Card(i));
     }
     this.deck = tempDeck;
     shuffle();
