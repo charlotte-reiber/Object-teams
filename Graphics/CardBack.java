@@ -13,7 +13,7 @@ class CardBack {
 
   private static final Color color = new Color(70, 50, 150);
   
-  CardBack(Graphics2D g, int h, int w) {
+  public CardBack(Graphics2D g, int h, int w) {
     this.graph = g;
     this.hight = h;
     this.width = w;
