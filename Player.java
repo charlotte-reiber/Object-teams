@@ -176,4 +176,12 @@ class Player {
       return false;
     return true;
   }
+
+  /**
+  * this is a method that returns 
+  * the number of pairs
+  */
+  public int getScore() {
+    return this.numPairs;
+  }
 }
