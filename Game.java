@@ -8,6 +8,7 @@ class Game {
   private Player[] players;
   private Player active;
   private Player recipient;
+  private static final int NUMDELT = 7;
   
   public Game(Scanner scan, int numPlayers) {
     this.deck = new Deck(52);
@@ -70,6 +71,7 @@ class Game {
   * this is a method that plays the game
   */
   public void playGame() {
+    deal();
     int[] scores = new int[this.players.length];
     while (!gameOver()) {
       for (Player player : this.players) {
@@ -107,5 +109,13 @@ class Game {
       }
     }
     return winners;
+  }
+
+  public void deal() {
+    for (int i = 0; i < NUMDELT; i++) {
+      for (Player player: this.players) {
+        player.goFish(this.deck.drawCard());
+      }
+    }
   }
 }
