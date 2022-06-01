@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Deck {
 
-  static final String[] SUITES = { "♠", "♥", "♦", "♣" };
-  static final String[] SPECIALS = { "A", "J", "Q", "K" };
-
   private int deckSize;
   ArrayList<Card> deck = new ArrayList<Card>();
   //private Card[] deck;
