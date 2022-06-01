@@ -7,11 +7,9 @@ public class Card {
     private int      suite;
     private String   cardFace;
     private int      value;
-    private int      id; 
     private int      cardValue;
     
     public Card(int deckSize, int input) {
-      this.id = input;
       this.value = input%13;
       this.suite = input/13;
       this.cardFace = (value==0) ? SPECIALS[0] : ((value<10) ? String.valueOf(value+1) : SPECIALS[value-9]);
