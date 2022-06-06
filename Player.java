@@ -33,19 +33,17 @@ class Player {
   * @return the card
   * @throw if the card isn't in the hand
   */
-  // does not work
-  public Card giveCard(int value) throws IllegalArgumentException{
+  // works
+  public Card giveCard(int value) {
     Card match = null;
-    boolean foundMatch = false;
     for (int i = 0; i < this.hand.size(); i++) {
-      if (this.hand.get(i).getValue() == value)
-        foundMatch = true;
+      if (this.hand.get(i).getValue() == value) {
         match = this.hand.get(i);
         this.hand.remove(i);
-        i--;
+        return match;
+      }
     }
-    if (foundMatch) return match;
-    else throw new IllegalArgumentException();
+    return match;
   }
 
   /**
@@ -75,13 +73,27 @@ class Player {
       } catch (NumberFormatException exception) {
         token = token.substring(0,1).toLowerCase();
         if (token.equals("a")) value = 1;
-        else if (token.equals("j")) value = 11;
-        else if (token.equals("q")) value = 12;
-        else if (token.equals("k")) value = 13;
-        if (value == -1) System.out.println("That is not a valid value.");
-        else if (!hasValue(value)) System.out.println("You do not have that value in your hand.");
-        else gotValue = true;
+        else if (token.equals("j")) {
+          value = 11;
+          gotValue = true;
+        }
+        else if (token.equals("q")) {
+          value = 12;
+          gotValue = true;
+        }
+        else if (token.equals("k")) {
+          value = 13;
+          gotValue = true;
+        }
+        else if (token.equals("a")) {
+          value = 1;
+          gotValue = true;
+        }
       }
+      if (!hasValue(value)) 
+        System.out.println("You do not have that value in your hand.");
+      else if (value > 1 && value < 11) gotValue = true;
+      else if (!gotValue) System.out.println("That is not a valid card value.");
     } while (!gotValue);
     return value;
   }

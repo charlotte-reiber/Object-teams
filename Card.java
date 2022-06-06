@@ -19,7 +19,7 @@ public class Card {
     /**Returns the value of the card from 1-13
     */
     public int getValue() {
-      return this.value;
+      return this.value + 1;
     }
   
     /**Returns the value of the card from 1-11

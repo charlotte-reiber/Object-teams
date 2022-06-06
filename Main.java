@@ -3,27 +3,14 @@ import java.util.Scanner;
 class Main {
   public static void main(String[] args) {
     Player player = new Player(new Scanner(System.in));
-    Card two = new Card (1);
-    Card three = new Card (2);
-    Card four = new Card (3);
-    Card five = new Card (4);
-    Card six = new Card (5);
-    Card threeHeart = new Card (15);
-    Card fourHeart = new Card (16);
+    Card[] hand = new Card[13];
+    for (int i = 0; i < 13; i++) hand[i] = new Card(i);
 
-    player.goFish(two);
-    player.goFish(fourHeart);
-    player.goFish(three);
-    player.goFish(four);
-    player.goFish(five);
-    player.goFish(six);
-    player.goFish(threeHeart);
-    
+    for (Card card : hand) player.goFish(card);
+
     System.out.println(player.getHand());
     
-    System.out.println(player.hasValue(3));
-    
-    System.out.println(player.hasValue(10));
+    for (int i = 0; i < 13; i++) System.out.println("the value the player is asking for is " + player.askValue());
     
     
     
