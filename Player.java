@@ -72,7 +72,10 @@ class Player {
         value = Integer.valueOf(token);
       } catch (NumberFormatException exception) {
         token = token.substring(0,1).toLowerCase();
-        if (token.equals("a")) value = 1;
+        if (token.equals("a")){
+          value = 1;
+          gotValue = true;
+        }
         else if (token.equals("j")) {
           value = 11;
           gotValue = true;
@@ -85,14 +88,12 @@ class Player {
           value = 13;
           gotValue = true;
         }
-        else if (token.equals("a")) {
-          value = 1;
-          gotValue = true;
-        }
       }
-      if (!hasValue(value)) 
+      if (value > 1 && value < 11) gotValue = true;
+      if (!hasValue(value) && gotValue) {
         System.out.println("You do not have that value in your hand.");
-      else if (value > 1 && value < 11) gotValue = true;
+        gotValue = false;
+      }
       else if (!gotValue) System.out.println("That is not a valid card value.");
     } while (!gotValue);
     return value;
