@@ -24,20 +24,31 @@ class Game {
   * a single round of turns
   */
   public void turn() {
+    boolean foundRecipient = false;
     String name;
     Card exchanged;
     int value;
-    do {
+    while (!foundRecipient) {
       name = active.askPlayer();
-    } while (playerExists(name));
+      if (playerExists(name)) {
+        foundRecipient = true;
+        for (Player player : this.players) {
+          if (player.checkName(name)) this.recipient = player;
+        }
+      }
+    }
     value = this.active.askValue(); 
     if (this.recipient.hasValue(value)) {
+      System.out.println(this.recipient.getName() + 
+        " has a " + value + "!");
       exchanged = this.recipient.giveCard(value);
       this.active.goFish(exchanged);
-      this.active.checkPairs();
     } else {
       this.active.goFish(this.deck.drawCard());
+      System.out.println(this.recipient.getName() + 
+        " doesn't have a " + value + ".\nGo Fish!");
     }
+    this.active.checkPairs();
   }
 
   /**
@@ -73,13 +84,21 @@ class Game {
   public void playGame() {
     deal();
     int[] scores = new int[this.players.length];
-    while (!gameOver()) {
+    //while (!gameOver()) {
+    for (int i = 0; i < 3; i++) {
       for (Player player : this.players) {
         if (!gameOver()){ 
           this.active = player;
-          System.out.println("it is " + 
+          this.active.checkPairs();
+          System.out.println("\nit is " + 
             this.active.getName() + "'s turn: ");
+          System.out.println(this.active.getName() + 
+            "'s hand: " + this.active.getHand());
           turn();
+          System.out.println(this.active.getName() + 
+            "'s hand is now: " + this.active.getHand());
+          System.out.println(this.active.getName() + 
+            " has " + this.active.getScore() + " pairs.");
         }
       }
     }
