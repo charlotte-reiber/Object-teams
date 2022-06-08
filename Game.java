@@ -1,9 +1,7 @@
 //import java.awt.*;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 class Game {
-  private Scanner scan;
   private Deck deck;
   private Player[] players;
   private Player active;
@@ -12,7 +10,6 @@ class Game {
   
   public Game(Scanner scan, int numPlayers) {
     this.deck = new Deck(52);
-    this.scan = scan;
     this.players = new Player[numPlayers];
     for (int i = 0; i < players.length; i++)
       players[i] = new Player(scan);
@@ -23,21 +20,22 @@ class Game {
   * this is a method that executes
   * a single round of turns
   */
-  // ONLY BIT THAT DOES NOT WORK
-  public void turn() {
+  private void turn(boolean firstTurn) {
     boolean foundRecipient = false;
     String name;
     Card exchanged;
     int value;
-    while (!foundRecipient) {
-      name = active.askPlayer();
+    do {
+      name = active.askPlayer(firstTurn);
       if (playerExists(name)) {
         foundRecipient = true;
         for (Player player : this.players) {
-          if (player.checkName(name)) this.recipient = player;
+          if (player.checkName(name)) 
+            this.recipient = player;
         }
       }
-    }
+      firstTurn = false;
+    } while (!foundRecipient);
     value = this.active.askValue(); 
     if (this.recipient.hasValue(value)) {
       System.out.println(this.recipient.getName() + 
@@ -56,7 +54,7 @@ class Game {
   * this is a method that gets a name from a player
   * and checks to see if that player exists
   */
-  public boolean playerExists(String name) {
+  private boolean playerExists(String name) {
     for (Player player : this.players) {
       if (player.getName().equals(name)
          && !player.equals(this.active)) {
@@ -72,7 +70,8 @@ class Game {
   * this is a method that checks 
   * if the game is over
   */
-  public boolean gameOver() {
+  private boolean gameOver(int numRounds) {
+    if (numRounds > 10) return false;
     for (Player player : this.players) {
       if (!player.hasCards()) return true;
     }
@@ -83,33 +82,32 @@ class Game {
   * this is a method that plays the game
   */
   public void playGame() {
+    boolean nextTurn = false;
+    int numRounds = 1;
     deal();
     int[] scores = new int[this.players.length];
-    //while (!gameOver()) {
-    for (int i = 0; i < 3; i++) {
+    while (!gameOver(numRounds)) {
       for (Player player : this.players) {
-        if (!gameOver()){ 
+        if (!gameOver(numRounds)){ 
           this.active = player;
           this.active.checkPairs();
           System.out.println("\nit is " + 
             this.active.getName() + "'s turn: ");
           System.out.println(this.active.getName() + 
             "'s hand: " + this.active.getHand());
-          turn();
+          turn(nextTurn);
+          nextTurn = true;
           System.out.println(this.active.getName() + 
             "'s hand is now: " + this.active.getHand());
           System.out.println(this.active.getName() + 
             " has " + this.active.getScore() + " pairs.");
         }
       }
+      numRounds++;
     }
     
-    for (int i = 0; i < scores.length; i++) {
-      scores[i] = this.players[i].getScore();
-    }
-
-    ArrayList<Player> winners = decideWinner(scores);
-    System.out.println("Winners:");
+    Player[] winners = decideWinner();
+    System.out.println("\nWinners:");
     for (Player winner : winners) 
       System.out.println(winner.getName());
   }
@@ -117,21 +115,38 @@ class Game {
   /**
   * this is a method that determines the winners
   */
-  public ArrayList<Player> decideWinner(int[] scores) {
-    ArrayList<Player> winners = new ArrayList<Player>();
+  private Player[] decideWinner() {
+    int[] scores = new int[this.players.length];
+    for (int i = 0; i < this.players.length; i++)
+      scores[i] = this.players[i].getScore();
+
     int highestScore = 0;
+    int numOccurance = 0;
+
     for (int score : scores) {
-      if (score > highestScore) score = highestScore;
+      if (score > highestScore) highestScore = score;
     }
-    for (Player player : this.players) {
-      if (player.getScore() == highestScore) {
-        winners.add(player);
+
+    for (int score : scores) 
+      if (score == highestScore) numOccurance++;
+
+    Player[] winners = new Player[numOccurance];
+    int index = 0;
+
+    for (Player participant : this.players) {
+      if (participant.getScore() == highestScore) {
+        winners[index] = participant;
+        index++;
       }
     }
+
     return winners;
   }
 
-  public void deal() {
+  /**
+  * this is a method that deals the cards
+  */
+  private void deal() {
     for (int i = 0; i < NUMDELT; i++) {
       for (Player player: this.players) {
         player.goFish(this.deck.drawCard());

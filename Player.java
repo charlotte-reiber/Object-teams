@@ -18,8 +18,9 @@ class Player {
   * @returns a name
   */
   // works
-  public String askPlayer() {
+  public String askPlayer(boolean weirdBit) {
     System.out.print("Who would you like to ask? ");
+    if (weirdBit) this.scan.nextLine();
     String player = this.scan.nextLine();
     player = player.replaceAll("\\s", "_");
     player = player.toLowerCase();
